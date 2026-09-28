@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MicroSave - Savings Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<div class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <h2>MicroSave</h2>
+        <p>Savings Tracker</p>
+    </div>
+
+    <button onclick="showPage('dashboard')">🏠 Dashboard</button>
+
+    <button onclick="showPage('groups')">👥 Groups</button>
+
+    <button onclick="showPage('members')">👤 Members</button>
+
+    <button onclick="showPage('contributions')">💰 Contributions</button>
+
+    <button onclick="showPage('loans')">💳 Loans</button>
+
+    <button onclick="showPage('repayments')">💵 Repayments</button>
+
+</div>
+
+
+
+<div class="main">
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+        <h2 id="pageTitle">Dashboard</h2>
+
+    </div>
+
+
+
+    <section id="dashboard" class="page active">
+
+        <h1>Welcome to MicroSave</h1>
+
+        <p class="subtitle">
+            Self-Help Group Savings Management System
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>👥 Groups</h3>
+                <p id="groupCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>👤 Members</h3>
+                <p id="memberCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>💰 Contributions</h3>
+                <p id="contributionCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>💳 Loans</h3>
+                <p id="loanCount">0</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="groups" class="page">
+
+        <h1>Groups</h1>
+
+        <form id="groupForm">
+
+            <input type="hidden" id="groupId">
+
+            <input
+                    type="text"
+                    id="groupName"
+                    placeholder="Group Name"
+                    required
+            >
+
+            <input
+                    type="text"
+                    id="groupCode"
+                    placeholder="Group Code"
+                    required
+            >
+
+            <input
+                    type="text"
+                    id="groupDescription"
+                    placeholder="Description"
+            >
+
+            <button type="submit">Save Group</button>
+
+            <button type="button" onclick="clearGroupForm()">
+                Clear
+            </button>
+
+        </form>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Group Name</th>
+                    <th>Group Code</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="groupTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section id="members" class="page">
+
+        <h1>Members</h1>
+
+        <form id="memberForm">
+
+            <input type="hidden" id="memberId">
+
+            <input
+                    type="text"
+                    id="memberName"
+                    placeholder="Member Name"
+                    required
+            >
+
+            <input
+                    type="email"
+                    id="memberEmail"
+                    placeholder="Email"
+            >
+
+            <input
+                    type="text"
+                    id="memberPhone"
+                    placeholder="Phone"
+            >
+
+            <button type="submit">Save Member</button>
+
+            <button type="button" onclick="clearMemberForm()">
+                Clear
+            </button>
+
+        </form>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="memberTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section id="contributions" class="page">
+
+        <h1>Contributions</h1>
+
+        <form id="contributionForm">
+
+            <input type="hidden" id="contributionId">
+
+            <input
+                    type="number"
+                    id="contributionMemberId"
+                    placeholder="Member ID"
+                    required
+            >
+
+            <input
+                    type="number"
+                    id="contributionAmount"
+                    placeholder="Amount"
+                    required
+            >
+
+            <button type="submit">
+                Save Contribution
+            </button>
+
+            <button type="button" onclick="clearContributionForm()">
+                Clear
+            </button>
+
+        </form>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Member ID</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="contributionTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <section id="loans" class="page">
+
+        <h1>Loans</h1>
+
+        <form id="loanForm">
+
+            <input type="hidden" id="loanId">
+
+            <input
+                    type="number"
+                    id="loanMemberId"
+                    placeholder="Member ID"
+                    required
+            >
+
+            <input
+                    type="number"
+                    id="loanAmount"
+                    placeholder="Loan Amount"
+                    required
+            >
+
+            <input
+                    type="number"
+                    id="interestRate"
+                    placeholder="Interest Rate"
+                    required
+            >
+
+            <button type="submit">
+                Save Loan
+            </button>
+
+            <button type="button" onclick="clearLoanForm()">
+                Clear
+            </button>
+
+        </form>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Member ID</th>
+                    <th>Amount</th>
+                    <th>Interest Rate</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="loanTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <section id="repayments" class="page">
+
+        <h1>Repayments</h1>
+
+        <form id="repaymentForm">
+
+            <input type="hidden" id="repaymentId">
+
+            <input
+                    type="number"
+                    id="repaymentLoanId"
+                    placeholder="Loan ID"
+                    required
+            >
+
+            <input
+                    type="number"
+                    id="repaymentAmount"
+                    placeholder="Repayment Amount"
+                    required
+            >
+
+            <button type="submit">
+                Save Repayment
+            </button>
+
+            <button type="button" onclick="clearRepaymentForm()">
+                Clear
+            </button>
+
+        </form>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Loan ID</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="repaymentTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
